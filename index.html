@@ -1,0 +1,462 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>The Virtual Reality Tour of the State Capitol Building</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Take a tour of the State Capitol Building on a Google Cardboard headset">
+    <meta name="keywords" content="Virtual Reality Tour of the State Capitol Building">
+    <meta name="author" content="Wisconsin.gov">
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
+
+    <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+
+<!--<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44130515-33', 'auto');
+  ga('send', 'pageview');
+</script> -->
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44130515-33"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44130515-33');
+</script>
+
+  </head>
+  <body>
+
+    <a-scene>
+
+      <a-sky data-array-link-id="rot" data-array="room" src="images/Rotunda.jpg" visible="true" rotation="0 -90 0"></a-sky>
+      <a-sky data-array-link-id="spl" data-array="room" src="images/Senate_Parlor.jpg" visible="false" rotation="0 135 0"></a-sky>
+      <a-sky data-array-link-id="nhr" data-array="room" src="images/N_Hearing.jpg" visible="false" rotation="-.5 -93 5"></a-sky>
+      <a-sky data-array-link-id="asc" data-array="room" src="images/Assembly_Chamber.jpg" visible="false" rotation="0 -90 3.5"></a-sky>
+      <a-sky data-array-link-id="gof" data-array="room" src="images/Gov_Office.jpg" visible="false" rotation="0 180 -2"></a-sky>
+      <a-sky data-array-link-id="sch" data-array="room" src="images/Senate_Chamber.jpg" visible="false" rotation="0 -90 0"></a-sky>
+      <a-sky data-array-link-id="sct" data-array="room" src="images/Supreme_Court.jpg" visible="false" rotation="0 -90 -6"></a-sky>
+      <a-sky data-array-link-id="lan" data-array="room" src="images/Lantern.jpg" visible="false" rotation="0 90 0"></a-sky>
+      <a-sky data-array-link-id="gcr" data-array="room" src="images/Gov_Conf_Room.jpg" visible="false" rotation="0 0 2"></a-sky>
+    
+
+
+      <a-entity>
+        <a-entity id="camera" camera="" look-controls="" mouse-cursor="">
+          <a-cursor id="cursor" cursor="fuse: false" scale="1.3 1.3 1.3"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1.3 1.3 1.3; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: #549ad5"
+          event-set__2="_event: mouseleave; color: #ededed"
+          raycaster="far: 20; interval: 1000; objects: .clickable"></a-cursor>
+        </a-entity>
+      </a-entity>
+
+
+  <!--Below is the code for POI "circles" that user clicks on-->
+
+  <!--POI Indicator for Rotunda-->
+
+    <a-entity data-array-link-id="rot" data-is-toggle-receiver-for="rot1" visible="true">
+      <a-image src="images/ui/POI_Indicator.png" data-is-button-for="rotpoi" data-array-link-id="rot" data-array="room" data-poi-array="rot" data-is-toggle-button-for="rot1" scale="7 7 7" position="-32 20 3" opacity="1" rotation="30.66 90 0"> </a-image>
+
+        <a-image src="images/ui/POI_Indicator.png" data-is-button-for="rotpoi1" data-array-link-id="rot" data-array="room" data-poi-array="rot" data-is-toggle-button-for="rot1" scale="2.3 2.3 2.3" position="0 12 -1" opacity="1" rotation="90 90 0"> </a-image>
+
+         <a-image src="images/ui/POI_Indicator.png" data-is-button-for="rotpoi2" data-array-link-id="rot" data-array="room" data-poi-array="rot" data-is-toggle-button-for="rot1" scale="3 3 3" position="9.5 9 10" opacity="1" rotation="0 -135 0"> </a-image>
+
+          <a-image src="images/ui/POI_Indicator.png" data-is-button-for="rotpoi3" data-array-link-id="rot" data-array="room" data-poi-array="rot" data-is-toggle-button-for="rot1" scale="12 12 12" position="-31.76 54.72 -18.08" opacity="1" rotation="28.88 57.84 0"> </a-image>
+    </a-entity>
+
+<!--POI indicators for the governors conference room-->
+
+    <a-entity data-array-link-id="gcr" data-is-toggle-receiver-for="gcr1" visible="false">
+      <a-image src="images/ui/POI_Indicator.png" data-is-button-for="gcrpoi" data-array-link-id="gcr" data-array="room" data-poi-array="gcr" data-is-toggle-button-for="gcr1" scale="1.8 1.8 2" position="7.68 0.38 -0.94" opacity="1" rotation="0 -90 0"> </a-image>
+                       
+        <a-image src="images/ui/POI_Indicator.png" data-is-button-for="gcrpoi1" data-array-link-id="gcr" data-array="room" data-poi-array="gcr" data-is-toggle-button-for="gcr1" scale="3 3 3" position="-15.08 0.82 0.58" opacity="1" rotation="0 90 0"> </a-image> 
+
+         <a-image src="images/ui/POI_Indicator.png" data-is-button-for="gcrpoi2" data-array-link-id="gcr" data-array="room" data-poi-array="gcr" data-is-toggle-button-for="gcr1" scale="2 2 2" position="-10 -.52 -3.08" opacity="1" rotation="0 60 0"> </a-image>    
+    </a-entity>
+
+    <!--POI Indicators for the North Hearing Room-->
+
+    <a-entity data-array-link-id="nhr" data-is-toggle-receiver-for="nhr1" visible="false">
+      <a-image src="images/ui/POI_Indicator.png" data-is-button-for="nhrpoi" data-array-link-id="nhr" data-array="room" data-poi-array="nhr" data-is-toggle-button-for="nhr1" scale="2.5 2.5 2.5" position="8 8 -4" opacity="1" rotation="20.56 -77 0"> </a-image>
+         
+        <a-image src="images/ui/POI_Indicator.png" data-is-button-for="nhrpoi1" data-array-link-id="nhr" data-array="room" data-poi-array="nhr" data-is-toggle-button-for="nhr1" scale="2 2 2" position="-3.76 0.81 -7.64" opacity="1" rotation="0.10 28.70 0"> </a-image>
+
+         <a-image src="images/ui/POI_Indicator.png" data-is-button-for="nhrpoi2" data-array-link-id="nhr" data-array="room" data-poi-array="nhr" data-is-toggle-button-for="nhr1" scale="2.5 2.5 2.5" position="-8.84 9.64 -2.85" opacity="1" rotation="15.36 78.82 0"> </a-image>       
+    </a-entity>
+
+<!--POI indicators for the Senate Parlor -->
+
+    <a-entity data-array-link-id="spl" data-is-toggle-receiver-for="spl1" visible="false">
+      <a-image src="images/ui/POI_Indicator.png" data-is-button-for="splpoi" data-array-link-id="spl" data-array="room" data-poi-array="spl" data-is-toggle-button-for="spl1" scale="2 2 2" position="1.64 3.86 7.17" opacity="1" rotation="120 0 0"> </a-image>
+
+      <a-image src="images/ui/POI_Indicator.png" data-is-button-for="splpoi1" data-array-link-id="spl" data-array="room" data-poi-array="spl" data-is-toggle-button-for="spl1" scale="2 2 2" position="-3.94 -1.32 -8.90" opacity="1" rotation="0 0 0"> </a-image> 
+     
+       <a-image src="images/ui/POI_Indicator.png" data-is-button-for="splpoi2" data-array-link-id="spl" data-array="room" data-poi-array="spl" data-is-toggle-button-for="spl1" scale="3.5 3.5 3.5" position="-2.76 6.52 20.62" opacity="1" rotation="-49.14 0 0"> </a-image> 
+
+    </a-entity>
+
+    <!--POI Indicators for the Assembly Chamber-->
+
+    <a-entity data-array-link-id="asc" data-is-toggle-receiver-for="asc1" visible="false">
+      <a-image src="images/ui/POI_Indicator.png" data-is-button-for="ascpoi" data-array-link-id="asc" data-array="room" data-poi-array="asc" data-is-toggle-button-for="asc1" scale="2 2 2" position="3.90 3.82 -10.10" opacity="1" rotation="0 0 0"> </a-image>
+
+      <a-image src="images/ui/POI_Indicator.png" data-is-button-for="ascpoi1" data-array-link-id="asc" data-array="room" data-poi-array="asc" data-is-toggle-button-for="asc1" scale="3.8 3.8 2" position="-1.45 2.62 -19.91" opacity="1" rotation="0 0 0"> </a-image> 
+     
+       <a-image src="images/ui/POI_Indicator.png" data-is-button-for="ascpoi2" data-array-link-id="asc" data-array="room" data-poi-array="asc" data-is-toggle-button-for="asc1" scale="2 2 2" position="-10 5.41 -10.90" opacity="1" rotation="0 45 0"> </a-image> 
+ 
+    </a-entity>
+
+   <!--POI Indicators for Governors Office-->
+
+    <a-entity data-array-link-id="gof" data-is-toggle-receiver-for="gof1" visible="false">
+      <a-image src="images/ui/POI_Indicator.png" data-is-button-for="gofpoi" data-array-link-id="gof" data-array="room" data-poi-array="gof" data-is-toggle-button-for="gof1" scale="2.5 2.5 2.5" position="-1.20 0.63 -17.98" opacity="1" rotation="0 0 0"> </a-image>
+
+        <a-image src="images/ui/POI_Indicator.png" data-is-button-for="gofpoi1" data-array-link-id="gof" data-array="room" data-poi-array="gof" data-is-toggle-button-for="gof1" scale="2.3 2.3 2.3" position="-14.5 -1.31 4.16" opacity="1" rotation="-.06 98.68 .62"> </a-image>
+
+         <a-image src="images/ui/POI_Indicator.png" data-is-button-for="gofpoi2" data-array-link-id="gof" data-array="room" data-poi-array="gof" data-is-toggle-button-for="gof1" scale="3 3 3" position="2.96 -4.12 -20.78" opacity="1" rotation="-13.32 0 0"> </a-image>
+
+          <a-image src="images/ui/POI_Indicator.png" data-is-button-for="gofpoi3" data-array-link-id="gof" data-array="room" data-poi-array="gof" data-is-toggle-button-for="gof1" scale="4 4 4" position="26.28 2.07 5.89" opacity="1" rotation="0 90 0"> </a-image>
+    </a-entity>
+
+    <!--POI Indicators for Senate Chamber-->
+
+    <a-entity data-array-link-id="sch" data-is-toggle-receiver-for="sch1" visible="false">
+      <a-image src="images/ui/POI_Indicator.png" data-is-button-for="schpoi" data-array-link-id="sch" data-array="room" data-poi-array="sch" data-is-toggle-button-for="sch1" scale="2 2 2" position="-0.60 3.54 -13.04" opacity="1" rotation="0 0 0"> </a-image>
+
+      <a-image src="images/ui/POI_Indicator.png" data-is-button-for="schpoi1" data-array-link-id="sch" data-array="room" data-poi-array="sch" data-is-toggle-button-for="sch1" scale="2 2 2" position="9.6 4.96 .14" opacity="1" rotation="0 -90 0"> </a-image> 
+     
+       <a-image src="images/ui/POI_Indicator.png" data-is-button-for="schpoi2" data-array-link-id="sch" data-array="room" data-poi-array="sch" data-is-toggle-button-for="sch1" scale="3 3 2" position=".4 15.54 -9.70" opacity="1" rotation="29.94 0 0"> </a-image> 
+ 
+    </a-entity>
+
+    <!--POI Indicators for the Supreme Court-->
+
+    <a-entity data-array-link-id="sct" data-is-toggle-receiver-for="sct1" visible="false">
+      <a-image src="images/ui/POI_Indicator.png" data-is-button-for="sctpoi" data-array-link-id="sct" data-array="room" data-poi-array="sct" data-is-toggle-button-for="sct1" scale="7 7 7" position="-18.68 9.79 -21.04" opacity="1" rotation="0 35 0"> </a-image>
+
+        <a-image src="images/ui/POI_Indicator.png" data-is-button-for="sctpoi1" data-array-link-id="sct" data-array="room" data-poi-array="sct" data-is-toggle-button-for="sct1" scale="2.3 2.3 2.3" position="15.67 5.34 -0.78" opacity="1" rotation="0 -90 0"> </a-image>
+
+         <a-image src="images/ui/POI_Indicator.png" data-is-button-for="sctpoi2" data-array-link-id="sct" data-array="room" data-poi-array="sct" data-is-toggle-button-for="sct1" scale="3 3 3" position="-1.30 5.40 -12.46" opacity="1" rotation="0 0 0"> </a-image>
+
+          <a-image src="images/ui/POI_Indicator.png" data-is-button-for="sctpoi3" data-array-link-id="sct" data-array="room" data-poi-array="sct" data-is-toggle-button-for="sct1" scale="12 12 12" position="68.18 -11.72 -31.18" opacity="1" rotation="0 -70.44 0"> </a-image>
+
+           <a-image src="images/ui/POI_Indicator.png" data-is-button-for="sctpoi4" data-array-link-id="sct" data-array="room" data-poi-array="sct" data-is-toggle-button-for="sct1" scale="10 10 10" position="-42.40 13.70 -2.62" opacity="1" rotation="6.96 90 0"> </a-image>
+    </a-entity>
+
+
+  <!--Below is the code for the POI panels with pictures and text-->
+
+  <!--Rotunda-->
+  
+   <a-entity data-is-receiver-for="rotpoi" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/Rotunda_LibertyBell.png" position="-61.70 40 -4" width="48" height="24" scale="2 2 2" rotation="35 90 0"></a-image>
+        <a-image data-is-button-for="rotpoi" data-is-toggle-button-for="rot1" src="images/ui/ic_clear_black_24px.png"  position="-49.06 53.56 -44.60" width=".4" height=".4" scale="16 16 16" rotation="35 90 0"></a-image>
+    </a-entity>
+
+    <a-entity data-is-receiver-for="rotpoi1" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/Rotunda_DomeMural.png" position="0 19 -10" width="10" height="5" scale="2.7 2.7 2.7" rotation="65 0 0"></a-image>
+        <a-image data-is-button-for="rotpoi1" data-is-toggle-button-for="rot1" src="images/ui/ic_clear_black_24px.png"  position="10.54 19 -5" width="1.5" height="1.5" scale="1.5 1.5 1.5" rotation="65 0 0"></a-image>
+    </a-entity>
+
+     <a-entity data-is-receiver-for="rotpoi2" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/Rotunda_RobertLaFollette.png" position="14 9 14" width="10" height="5" scale="2.7 2.7 2.7" rotation="11.68 -135 0"></a-image>
+        <a-image data-is-button-for="rotpoi2" data-is-toggle-button-for="rot1" src="images/ui/ic_clear_black_24px.png"  position="5.08 13.60 21.03" width="4" height="4" scale=".8 .8 .8" rotation="-7.92 45.48 0"></a-image>
+    </a-entity>
+
+      <a-entity data-is-receiver-for="rotpoi3" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/Rotunda_Mosaic.png" position="-43.88 62.05 -25.42" width="10" height="5" scale="7.5 7.5 7.5" rotation="35.04 66.20 0"></a-image>
+        <a-image data-is-button-for="rotpoi3" data-is-toggle-button-for="rot1" src="images/ui/ic_clear_black_24px.png"  position="-24.06 72.36 -50.97" width="4" height="4" scale="2 2 1" rotation="35.96 66.54 0"></a-image>
+    </a-entity>
+  
+  <!--Senate Parlor-->
+
+  <a-entity data-is-receiver-for="splpoi" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/SenateParlor_Diligentia.png" position="3.52 11.64 55.83" width="48" height="24" scale="1.3 1.3 1.3" rotation="13.42 180 0"></a-image>
+        <a-image data-is-button-for="splpoi" data-is-toggle-button-for="spl1" src="images/ui/ic_clear_black_24px.png"  position="-20.91 20.58 46.07" scale="5.46 5.06 0" width="1" height="1" rotation="25.30 180 0"></a-image>
+    </a-entity>
+
+    <a-entity data-is-receiver-for="splpoi1" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/SenateParlor_Fireplace.png" position="-3.94 -1.32 -8.90" width="10" height="5" scale="1 1 1" rotation="0 12.34 0"></a-image>
+        <a-image data-is-button-for="splpoi1" data-is-toggle-button-for="spl1" src="images/ui/ic_clear_black_24px.png"  position=".15 .33 -8.68" scale="3 3 2" width=".4" height=".4" rotation="0 0 -1.34"></a-image>
+    </a-entity>
+
+     <a-entity data-is-receiver-for="splpoi2" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/SenateParlor_Sapientia.png" position="-2.38 3 8.34" width="10" height="5" scale="1 1 1" rotation="15.04 173 0"></a-image>
+        <a-image data-is-button-for="splpoi2" data-is-toggle-button-for="spl1" src="images/ui/ic_clear_black_24px.png"  position="-6.16 4.59 6.99" scale="3 3 2" width=".4" height=".4" rotation="7.56 175.36 0"></a-image>
+    </a-entity>
+
+    <!--Gov_Conf_Room-->
+
+    <a-entity data-is-receiver-for="gcrpoi" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/GovernorsConferenceRoom_CivilWarMural.png" position="49.66 9.92 -6.66" width="48" height="24" scale="1 1 1" rotation="1.96 -85.90 -0.56"></a-image>
+        <a-image data-is-button-for="gcrpoi" data-is-toggle-button-for="gcr1" src="images/ui/ic_clear_black_24px.png"  position="49.62 18.58 14.42" scale="4 4 4" width="1" height="1" rotation="0 -90 -1.62"></a-image>
+    </a-entity>
+
+    <a-entity data-is-receiver-for="gcrpoi1" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/GovernorsConferenceRoom_Fireplace.png" position="-28.40 0.46 0.58" width="10" height="5" scale="2.7 2.7 2.7" rotation="1.96 93.82 0"></a-image>
+        <a-image data-is-button-for="gcrpoi1" data-is-toggle-button-for="gcr1" src="images/ui/ic_clear_black_24px.png" position="-28.12 5.64 -10.96" scale="6 6 6" width=".4" height=".4" rotation="0 90 0"></a-image>
+        </a-entity>
+
+        <a-entity data-is-receiver-for="gcrpoi2" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/GovernorsConferenceRoom_HenryDodgeBust.png" position="-28.40 0.46 0.58" width="10" height="5" scale="2.7 2.7 2.7" rotation="1.96 93.82 0"></a-image>
+        <a-image data-is-button-for="gcrpoi2" data-is-toggle-button-for="gcr1" src="images/ui/ic_clear_black_24px.png" position="-28.12 5.64 -10.96" scale="6 6 6" width=".4" height=".4" rotation="0 90 0"></a-image>
+    </a-entity>
+
+
+
+    <!--North Hearing Room POI Panels -->
+
+     <a-entity data-is-receiver-for="nhrpoi" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/NorthHearingRoom_Canoe.png" position="45.28 31.02 -14.26" width="48" height="24" scale="1.3 1.3 1.3" rotation="20.56 -77 0"></a-image>
+        <a-image data-is-button-for="nhrpoi" data-is-toggle-button-for="nhr1" src="images/ui/ic_clear_black_24px.png"  position="43.98 39.66 12.54" scale="7 7 7" width="1" height="1" rotation="20.72 -73.72 0"></a-image>
+    </a-entity>
+
+    <a-entity data-is-receiver-for="nhrpoi1" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/NorthHearingRoom_Fossil.png" position="-3.76 0.81 -7.64" width="10" height="5" scale="1 1 1" rotation="2.08 30 0"></a-image>
+        <a-image data-is-button-for="nhrpoi1" data-is-toggle-button-for="nhr1" src="images/ui/ic_clear_black_24px.png"  position="-0.06 2.48 -9.48" scale="3 3 2" width=".4" height=".4" rotation="0 30 0"></a-image>
+    </a-entity>
+
+     <a-entity data-is-receiver-for="nhrpoi2" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/NorthHearingRoom_ModernTransportation.png" position="-6.96 4.73 -1.91" width="10" height="5" scale="1 1 1" rotation="15.36 78.82 0"></a-image>
+        <a-image data-is-button-for="nhrpoi2" data-is-toggle-button-for="nhr1" src="images/ui/ic_clear_black_24px.png"  position="-5.28 6.02 -5.66" scale="3 3 2" width=".4" height=".4" rotation="35.22 72.32 -1.32"></a-image>
+    </a-entity>
+
+    <!--Assembly Chamber POI Panels-->
+
+    <a-entity data-is-receiver-for="ascpoi" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/Assembly_GhostMural.png" position="8.19 12.05 -62.89" width="48" height="24" scale="1.5 1.5 1.5" rotation="0 0 0"></a-image>
+        <a-image data-is-button-for="ascpoi" data-is-toggle-button-for="asc1" src="images/ui/ic_clear_black_24px.png"  position="38.02 25.32 -62.59" scale="7.8 7.8 1.5" width="1" height="1" rotation="0 0 0"></a-image>
+    </a-entity>
+
+    <a-entity data-is-receiver-for="ascpoi1" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/Assembly_OldAbe.png" position="-1.45 2.32 -14.79" width="10" height="5" scale="1.5 1.5 1.5" rotation="0 0 0"></a-image>
+        <a-image data-is-button-for="ascpoi1" data-is-toggle-button-for="asc1" src="images/ui/ic_clear_black_24px.png"  position="5.06 5.09 -14.32" scale="4 4 4" width=".4" height=".4" rotation="0 0 -1.34"></a-image>
+    </a-entity>
+
+     <a-entity data-is-receiver-for="ascpoi2" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/Assembly_VoteRegister.png" position="-6.92 2.25 -6.80" width="10" height="5" scale="1 1 1" rotation="5.66 45.00 0"></a-image>
+        <a-image data-is-button-for="ascpoi2" data-is-toggle-button-for="asc1" src="images/ui/ic_clear_black_24px.png"  position="-3.56 4.07 -9.46" scale="3 3 2" width=".4" height=".4" rotation="10.64 41.48 0"></a-image>
+    </a-entity>
+
+    <!--Senate Chamber POI Panels-->
+
+    <a-entity data-is-receiver-for="schpoi" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/Senate_MarriageAtlanticPacific.png" position="0.02 4.92 -51.12" width="48" height="24" scale="1.5 1.5 1.5" rotation="0 0 0"></a-image>
+        <a-image data-is-button-for="schpoi" data-is-toggle-button-for="sch1" src="images/ui/ic_clear_black_24px.png"  position="29.98 18.54 -48.98" scale="6 6 6" width="1" height="1" rotation="0 0 0"></a-image>
+    </a-entity>
+
+    <a-entity data-is-receiver-for="schpoi1" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/Senate_Galleries.png" position="10.90 4.60 -.96" width="10" height="5" scale="1.5 1.5 1.5" rotation="9.84 -90 0"></a-image>
+        <a-image data-is-button-for="schpoi1" data-is-toggle-button-for="sch1" src="images/ui/ic_clear_black_24px.png"  position="10.32 7.34 5.48" scale="4 4 2" width=".4" height=".4" rotation="9.32 -90 0"></a-image>
+    </a-entity>
+
+     <a-entity data-is-receiver-for="schpoi2" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/Senate_Skylight.png" position="-.14 5.40 -4.02" width="10" height="5" scale="1 1 1" rotation="35 0 0"></a-image>
+        <a-image data-is-button-for="schpoi2" data-is-toggle-button-for="sch1" src="images/ui/ic_clear_black_24px.png"  position="4.16 6.84 -2.84" scale="3 3 2" width=".4" height=".4" rotation="35 0 0"></a-image>
+    </a-entity>
+
+    <!--POI Panels for Supreme Court-->
+
+    <a-entity data-is-receiver-for="sctpoi" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/SupremeCourt_Candelabras.png" position="-59.98 21.05 -61.22" width="48" height="24" scale="2 2 2" rotation="11.56 49.54 0.00"></a-image>
+        <a-image data-is-button-for="sctpoi" data-is-toggle-button-for="sct1" src="images/ui/ic_clear_black_24px.png"  position="-22.72 30.17 -68.50" width=".4" height=".4" scale="17 17 17" rotation="0 49 0"></a-image>
+    </a-entity>
+
+    <a-entity data-is-receiver-for="sctpoi1" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/SupremeCourt_ChiefOshkoshMural.png" position="25.61 5.34 -1.08" width="10" height="5" scale="2.7 2.7 2.7" rotation="0 -90.14 0"></a-image>
+        <a-image data-is-button-for="sctpoi1" data-is-toggle-button-for="sct1" src="images/ui/ic_clear_black_24px.png"  position="23.90 9.96 10.16" width="1.5" height="1.5" scale="2 2 1" rotation="0 -90 0"></a-image>
+    </a-entity>
+
+     <a-entity data-is-receiver-for="sctpoi2" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/SupremeCourt_ConstitutionMural.png" position="-2.34 6.98 -21.45" width="10" height="5" scale="2.7 2.7 2.7" rotation="9.52 0 0"></a-image>
+        <a-image data-is-button-for="sctpoi2" data-is-toggle-button-for="sct1" src="images/ui/ic_clear_black_24px.png"  position="8.66 11.36 -19.71" width="4" height="4" rotation="0 0 0"></a-image>
+    </a-entity>
+
+      <a-entity data-is-receiver-for="sctpoi3" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/SupremeCourt_Gavelmeter.png" position="68.18 -11.72 -31.18" width="10" height="5" scale="7.5 7.5 7.5" rotation="0 -70.44 0"></a-image>
+        <a-image data-is-button-for="sctpoi3" data-is-toggle-button-for="sct1" src="images/ui/ic_clear_black_24px.png"  position="66.82 2.74 .16" width="4" height="4" scale="1.4 1.4 1.4" rotation="0 -70.44 0"></a-image>
+        </a-entity>
+
+        <a-entity data-is-receiver-for="sctpoi4" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/SupremeCourt_MagnaCartaMural.png" position="-60.02 26.16 .5" width="10" height="5" scale="7.5 7.5 7.5" rotation="2.64 90 0"></a-image>
+        <a-image data-is-button-for="sctpoi4" data-is-toggle-button-for="sct1" src="images/ui/ic_clear_black_24px.png"  position="-56.18 37.78 -29.97" width="4" height="4" scale="2 2 2" rotation="19.82 90 0"></a-image>
+    </a-entity>
+
+    <!--POI Panels for the Governors Office-->
+
+     <a-entity data-is-receiver-for="gofpoi" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/GovernorsOffice_FreedomsFinest.png" position="-1.20 0.63 -84.88" width="48" height="24" scale="2 2 2" rotation="0 0 0"></a-image>
+        <a-image data-is-button-for="gofpoi" data-is-toggle-button-for="gof1" src="images/ui/ic_clear_black_24px.png"  position="39.81 19.30 -83.52" width=".4" height=".4" scale="25 25 25" rotation="0 0 0"></a-image>
+    </a-entity>
+
+    <a-entity data-is-receiver-for="gofpoi1" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/GovernorsOffice_HonorMedallions.png" position="-20.83 -4.70 5.16" width="10" height="5" scale="2.7 2.7 2.7" rotation="-11.90 101.06 0"></a-image>
+        <a-image data-is-button-for="gofpoi1" data-is-toggle-button-for="gof1" src="images/ui/ic_clear_black_24px.png"  position="-23.57 .06 -5.56" width="1.5" height="1.5" scale="3 3 3" rotation="-4.88 93.22 0"></a-image>
+    </a-entity>
+
+     <a-entity data-is-receiver-for="gofpoi2" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/GovernorsOffice_ReproductionFlag.png" position="4 -2.22 -19.50" width="10" height="5" scale="2.7 2.7 2.7" rotation="-3.94 -6.48 0"></a-image>
+        <a-image data-is-button-for="gofpoi2" data-is-toggle-button-for="gof1" src="images/ui/ic_clear_black_24px.png"  position="15.16 2.50 -18.16" width="4" height="4" rotation="-3.94 -6.48 0"></a-image>
+    </a-entity>
+
+      <a-entity data-is-receiver-for="gofpoi3" data-array-poi-link-id="panelhide" data-poi-array="poiarray" visible="false">
+      <a-image src="images/POIs/GovernorsOffice_OldAbePortrait.png" position="66.52 15.90 12.76" width="10" height="5" scale="7.5 7.5 7.5" rotation="6.96 -95.28 0"></a-image>
+        <a-image data-is-button-for="gofpoi3" data-is-toggle-button-for="gof1" src="images/ui/ic_clear_black_24px.png"  position="61.22 29.88 43.94" width="4" height="4" scale="2 2 2" rotation="0 -90 0"></a-image>
+    </a-entity>
+
+ 
+  <!--Below is the the code for Room Names-->
+
+    
+
+      <a-image data-array-link-id="nhr" data-array="room" src="images/ui/Room Signs/RoomSign_NorthHearingRoom.png" scale="1 .25 .25" position="0 -1 -1" rotation="-45 0 0" visible="false"></a-image>
+
+      <a-image data-array-link-id="spl" data-array="room" src="images/ui/Room Signs/RoomSign_SenateParlor.png" scale="1 .25 .25" position="0 -1 -1" rotation="-45 0 0" visible="false"></a-image>
+
+      <a-image data-array-link-id="asc" data-array="room" src="images/ui/Room Signs/RoomSign_Assembly.png" scale="1 .25 .25" position="0 -1 -1" rotation="-45 0 0" visible="false"></a-image>
+
+      <a-image data-array-link-id="gof" data-array="room" src="images/ui/Room Signs/RoomSign_GovOffice.png" scale="1 .25 .25" position="0 -1 -1" rotation="-45 0 0" visible="false"></a-image>
+
+      <a-image data-array-link-id="rot" data-array="room" data-array="roomname" src="images/ui/Room Signs/RoomSign_Rotunda.png" scale="1 .25 .25" position="0 -1 -1" rotation="-45 0 0" visible="true"></a-image>
+
+      <a-image data-array-link-id="sch" data-array="room" src="images/ui/Room Signs/RoomSign_Senate.png" scale="1 .25 .25" position="0 -1 -1" rotation="-45 0 0" visible="false"></a-image>
+
+      <a-image data-array-link-id="sct" data-array="room" src="images/ui/Room Signs/RoomSign_SupremeCourt.png" scale="1 .25 .25" position="0 -1 -1" rotation="-45 0 0" visible="false"></a-image> 
+
+      <a-image data-array-link-id="lan" data-array="room" src="images/ui/Room Signs/RoomSign_Lantern.png" scale="1 .25 .25" position="0 -1 -1" rotation="-45 0 0" visible="false"></a-image>
+
+      <a-image data-array-link-id="gcr" data-array="room" src="images/ui/Room Signs/RoomSign_GovConferenceRoom.png" scale="1 .25 .25" position="0 -1 -1" rotation="-45 0 0" visible="false"></a-image>
+
+      
+  
+      
+
+
+
+    <a-entity id="BlackBottomCircle">
+      <a-image src="images/ui/BlackCircle.png" scale="30 30 30" position="0 -28 0" rotation="-90 0 0" visible="true"></a-image>
+    </a-entity>
+
+
+     <a-entity id="navcubeRot">
+      <a-image data-array-link="nav" data-array="persist_ui" src="images/ui/Menu_Btn.png" position="-2.1 -2 -1.9" width="1" height=".5" rotation="-45 0 0"></a-image>
+    </a-entity>
+
+
+    <a-entity id="HelpNav">
+      <a-image data-array-link="help" data-array="persist_ui" src="images/ui/Help_Btn.png" position="2.1 -2 -1.9" width="1" height=".5" rotation="-45 0 0"></a-image>
+    </a-entity>
+
+
+   <a-entity data-array-link-id="help" data-array="ui" data-is-receiver-for="closehelp" visible="true">
+      <a-image src="images/ui/HelpMenu.png" position="0 -.8 -5" rotation="-10 0 0" width="8" height="4.1" material="shader:flat;opacity:1;color:#fff"></a-image>
+      <a-image data-array-link-id="help" data-array="ui" data-is-button-for="closehelp" src="images/ui/ic_clear_black_24px.png"  position="2.05 0.45 -3" width=".4" height=".4" rotation="-10 0 0"></a-image>
+      </a-entity>
+
+
+<!-- This is the "navigation panel" with the selection of rooms -->
+
+    <a-entity data-array-link-id="nav" data-array="ui" data-is-receiver-for="closenav" data-is-room-receiver-for="navclick" visible="false" position="0 -.8 -5" rotation="-10 0 0">
+        <a-image src="images/ui/RoomMenu.png" width="9" height="6"></a-image>
+
+    <a-entity id="NavThumbs" position="0 -1.6 .8" rotation="10 0 0" scale=".9 .9 .9">
+        <a-plane data-array-link="nhr" data-is-room-button-for="navclick" data-array-poi-link="panelhide" data-poi-array="panelhide" opacity="0" rotation="-10 0 0" width="12" height="6" position="-2.74 3.3 -.9" scale="0.2 0.2 0.2"></a-plane>
+        <a-plane data-array-link="spl" data-is-room-button-for="navclick" data-array-poi-link="panelhide" data-poi-array="panelhide" opacity="0" rotation="-10 0 0" width="12" height="6" position="-2.78 1.6 -.7" scale="0.2 0.2 0.2"></a-plane>
+        <a-plane data-array-link="asc" data-is-room-button-for="navclick" data-array-poi-link="panelhide" data-poi-array="panelhide" opacity="0" rotation="-10 0 0" width="12.2" height="6" position="-2.84 -.06 -.5" scale="0.2 0.2 0.2"></a-plane>
+        <a-plane data-array-link="gof" data-is-room-button-for="navclick" data-array-poi-link="panelhide" data-poi-array="panelhide" opacity="0" rotation="-10 0 0" width="12" height="6" position="0 3.33 -.9" scale="0.2 0.2 0.2"></a-plane>
+        <a-plane data-array-link="rot" data-is-room-button-for="navclick" data-array-poi-link="panelhide" data-poi-array="panelhide" opacity="0" rotation="-10 0 0" width="12" height="6" position="0 1.6 -.7" scale="0.2 0.2 0.2"></a-plane>
+        <a-plane data-array-link="sch" data-is-room-button-for="navclick" data-array-poi-link="panelhide" data-poi-array="panelhide" opacity="0" rotation="-10 0 0" width="12.2" height="6" position="0 -.06 -.5" scale="0.2 0.2 0.2"></a-plane>
+        <a-plane data-array-link="sct" data-is-room-button-for="navclick" data-array-poi-link="panelhide" data-poi-array="panelhide" opacity="0" rotation="-10 0 0" width="12" height="6" position="2.76 3.32 -.9" scale="0.2 0.2 0.2"></a-plane>
+        <a-plane data-array-link="lan" data-is-room-button-for="navclick" data-array-poi-link="panelhide" data-poi-array="panelhide" opacity="0" rotation="-10 0 0" width="12" height="6" position="2.81 1.61 -.7" scale="0.2 0.2 0.2"></a-plane>
+        <a-plane data-array-link="gcr" data-is-room-button-for="navclick" data-array-poi-link="panelhide" data-poi-array="panelhide" opacity="0" rotation="-10 0 0" width="12.2" height="6" position="2.86 -.06 -.5" scale="0.2 0.2 0.2"></a-plane>
+        <a-image data-array-link-id="nav" data-is-button-for="closenav" data-array="ui" src="images/ui/ic_clear_black_24px.png" scale="1.5 1.5 1.5" position="2.90 3.72 .5" rotation="-10 0 0" width=".4" height=".4" rotation="-10 0 0"></a-image>
+        </a-entity>
+
+    </a-entity>
+
+
+
+
+  </a-scene>
+
+  <script type="text/javascript">
+
+$(function(){
+    $('[data-is-button-for]').click(function(){
+        var receiver = $('[data-is-receiver-for="'+$(this).attr('data-is-button-for')+'"]');
+        if(receiver.attr('visible') == true) {
+            console.log("hide");
+            receiver.attr('visible', false);
+        }else{
+            console.log("show");
+            receiver.attr('visible', true);
+        }
+    });
+});
+
+$(function(){
+    $('[data-is-toggle-button-for]').click(function(){
+        var receiver = $('[data-is-toggle-receiver-for="'+$(this).attr('data-is-toggle-button-for')+'"]');
+        if(receiver.attr('visible') == true) {
+            console.log("hide");
+            receiver.attr('visible', false);
+        }else{
+            console.log("show");
+            receiver.attr('visible', true);
+        }
+    });
+});
+
+$(function(){
+    $('[data-array-link]').click(function() {
+        var link = $(this);
+        var linkWindow = $('[data-array-link-id="'+$(this).attr('data-array-link')+'"]');
+        $( '[data-array="'+linkWindow.attr('data-array')+'"]').each(function(index, object) {
+            $(object).attr('visible', false);
+        });
+        console.log('got here at least');
+        linkWindow.attr('visible', true);
+    });
+});
+
+$(function(){
+    $('[data-is-room-button-for]').click(function(){
+        var receiver = $('[data-is-room-receiver-for="'+$(this).attr('data-is-room-button-for')+'"]');
+        if(receiver.attr('visible') == true) {
+            console.log("hide");
+            receiver.attr('visible', false);
+        }else{
+            console.log("show");
+            receiver.attr('visible', true);
+        }
+    });
+});
+
+$(function(){
+    $('[data-array-poi-link]').click(function() {
+        var link = $(this);
+        var linkWindow = $('[data-array-poi-link-id="'+$(this).attr('data-array-poi-link')+'"]');
+        $( '[data-poi-array="'+linkWindow.attr('data-poi-array')+'"]').each(function(index, object) {
+            $(object).attr('visible', false);
+        });
+        console.log('poi visiblity array');
+    });
+});
+  </script>
+    
+  </body>
+</html>
